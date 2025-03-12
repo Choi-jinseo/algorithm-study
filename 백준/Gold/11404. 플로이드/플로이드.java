@@ -29,8 +29,11 @@ public class Main {
 
         for (int k = 0; k < n; k++) { // 경유 도시
             for (int i = 0; i < n; i++) { // 시작 도시
+                if (cost[i][k] == 10000001) continue; // (시작 - 경유) 경로가 없다면 업데이트 할수없음
+                if (i == k) continue;
                 for (int j = 0; j < n; j++) { // 도착 도시
                     if (i == j) continue;
+                    if (k == j) continue;
                     cost[i][j] = Math.min(cost[i][j], cost[i][k] + cost[k][j]);
                 }
             }
