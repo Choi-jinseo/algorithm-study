@@ -19,18 +19,19 @@ public class Main {
 
         sb.append("<");
         int cursor = K-1;
-        for (int i = 0; i < N-1; i++) {
-            if (cursor < arr.size()) {
+        while (N > 1) {
+            if (cursor < N) {
                 sb.append(arr.get(cursor)).append(", ");
                 arr.remove(cursor);
                 cursor--;
             }
             else {
-                cursor = cursor % arr.size();
+                cursor = cursor % N;
                 sb.append(arr.get(cursor)).append(", ");
                 arr.remove(cursor);
                 cursor--;
             }
+            N--;
             cursor += K;
         }
         sb.append(arr.get(0)).append(">");
