@@ -19,11 +19,7 @@ public class Main {
 
         sb.append("<");
         int cursor = K-1;
-        for (int i = 0; i < N; i++) {
-            if (i == N-1) {
-                sb.append(arr.get(0)).append(">");
-                break;
-            }
+        for (int i = 0; i < N-1; i++) {
             if (cursor < arr.size()) {
                 sb.append(arr.get(cursor)).append(", ");
                 arr.remove(cursor);
@@ -37,6 +33,7 @@ public class Main {
             }
             cursor += K;
         }
+        sb.append(arr.get(0)).append(">");
         System.out.print(sb);
         br.close();
     }
