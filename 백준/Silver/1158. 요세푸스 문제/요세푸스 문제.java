@@ -17,9 +17,9 @@ public class Main {
             arr.add(i);
         }
 
+        sb.append("<");
         int cursor = K-1;
         for (int i = 0; i < N; i++) {
-            if (i == 0) sb.append("<");
             if (i == N-1) {
                 sb.append(arr.get(0)).append(">");
                 break;
