@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(br.readLine()); // 큐의 크기
+        int N = Integer.parseInt(br.readLine());
 
         HashMap<String, Integer> bookCount = new HashMap<>();
 
