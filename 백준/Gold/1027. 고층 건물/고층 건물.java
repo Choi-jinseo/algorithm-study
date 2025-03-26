@@ -21,6 +21,9 @@ public class Main {
             for (int j = 0; j < i; j++) { // 왼쪽 빌딩
                 boolean visible = true;
                 for (int k = j + 1; k < i; k++) { // 중간 빌딩 탐색
+                    
+                    // 음수를 양변에 곱하면 부등호가 바뀌는 점에 유의하자.
+                    
                     if ((arr[i] - arr[j]) * (k - j) + arr[j] * (i - j) <= arr[k] * (i - j)) { // 가리면
                         visible = false;
                         break;
