@@ -15,14 +15,15 @@ public class Main {
 
         for (int i = 1; i <= N; i++) {
             int num = i; // 분해된 수
-            int sis = i; // 소인수
-            for (int j = 2; j <= num; j++) {
+            int max = i; // 최대 소인수
+            for (int j = 2; j <= Math.sqrt(i); j++) {
                 while (num % j == 0) {
-                    sis = num;
                     num /= j;
+                    if (num > 1) max = num;
+                    else max = j;
                 }
             }
-            if (sis <= K) answer++;
+            if (max <= K) answer++;
         }
         System.out.println(answer);
         br.close();
