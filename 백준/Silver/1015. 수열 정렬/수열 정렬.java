@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
 
         // A = {2.0 3.1 1.2}
         // A = {1.2 2.0 3.1} // A.b 로 정렬
@@ -46,9 +47,9 @@ public class Main {
             P[I[i]] = i;
         }
         for (int i = 0; i < N; i++) {
-            System.out.print(P[i] + " ");
+            sb.append(P[i]).append(' ');
         }
-
+        System.out.println(sb);
         br.close();
     }
 }
