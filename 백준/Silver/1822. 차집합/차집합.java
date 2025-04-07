@@ -12,19 +12,18 @@ public class Main {
         int NA = Integer.parseInt(st.nextToken());
         int NB = Integer.parseInt(st.nextToken());
 
-        HashSet<Integer> HA = new HashSet<>();
+        TreeSet<Integer> TA = new TreeSet<>();
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < NA; i++) {
-            HA.add(Integer.parseInt(st.nextToken()));
+            TA.add(Integer.parseInt(st.nextToken()));
         }
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < NB; i++) {
             int b = Integer.parseInt(st.nextToken());
-            HA.remove(b);
+            TA.remove(b);
         }
-        
-        TreeSet<Integer> TA = new TreeSet<>(HA);
+
         sb.append(TA.size()).append('\n');
         for (int a : TA) {
             sb.append(a).append(" ");
