@@ -29,8 +29,7 @@ public class Main {
                 int x = 0;
                 for (int k = i - 1; k <= i + 1; k++) {
                     for (int l = j - 1; l <= j+1; l++) {
-                        nine[x] = arr[k][l];
-                        x++;
+                        nine[x++] = arr[k][l];
                     }
                 }
                 for (int k = 1; k < 9; k++) {
