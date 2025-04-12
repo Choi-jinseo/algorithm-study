@@ -9,7 +9,7 @@ public class Main {
 //        StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(br.readLine());
-        int count2 = 0;
+//        int count2 = 0;
         int count5 = 0;
         for (int i = 2; i <= N; i++) {
             int temp = i;
