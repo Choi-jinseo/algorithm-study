@@ -13,16 +13,17 @@ public class Main {
         int count5 = 0;
         for (int i = 2; i <= N; i++) {
             int temp = i;
-            while (temp % 2 == 0) {
-                temp /= 2;
-                count2++;
-            }
+//            while (temp % 2 == 0) {
+//                temp /= 2;
+//                count2++;
+//            }
             while (temp % 5 == 0) {
                 temp /= 5;
                 count5++;
             }
         }
-        System.out.println(Math.min(count2, count5));
+//        System.out.println(Math.min(count2, count5));
+        System.out.println(count5);
         br.close();
     }
 }
