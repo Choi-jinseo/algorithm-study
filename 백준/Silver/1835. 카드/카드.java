@@ -9,7 +9,7 @@ public class Main {
 //        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
         int N = Integer.parseInt(br.readLine());
-        Deque<Integer> deque = new LinkedList<>();
+        Deque<Integer> deque = new ArrayDeque<>();
 
         deque.addFirst(N);
 
