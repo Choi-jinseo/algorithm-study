@@ -16,7 +16,7 @@ public class Main {
         for (int i = N - 1; i > 0; i--) {
             deque.addFirst(i);
             for (int j = 0; j < i; j++) {
-                deque.addFirst(deque.removeLast());
+                deque.addFirst(deque.pollLast());
             }
         }
         for (Integer i: deque) {
