@@ -34,16 +34,16 @@ public class Main {
         if (parent[M] == -1) System.out.println(0);
         else {
             child[parent[M]].remove(M); // 서브트리 끊기
-            dfs(child, root);
+            dfs(root);
             System.out.println(count);
         }
 
         br.close();
     }
-    static void dfs(ArrayList<Integer>[] child, int n) {
+    static void dfs(int n) {
         if (child[n].isEmpty()) count++;
         for (Integer c : child[n]) {
-            dfs(child, c);
+            dfs(c);
         }
     }
 }
