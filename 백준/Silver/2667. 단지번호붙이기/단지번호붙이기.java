@@ -28,7 +28,7 @@ public class Main {
                 }
             }
         }
-        counts.sort(Comparator.naturalOrder());
+        Collections.sort(counts);
         sb.append(counts.size()).append('\n');
         for (Integer count : counts) {
             sb.append(count).append('\n');
