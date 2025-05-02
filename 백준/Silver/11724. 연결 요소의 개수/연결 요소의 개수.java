@@ -5,26 +5,21 @@ import java.util.*;
 
 public class Main {
     static boolean[] visited;
-    static ArrayList<Integer>[] arr;
-    static int N;
+    static int[][] arr;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
+        arr = new int[N][N];
         visited = new boolean[N];
-        arr = new ArrayList[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = new ArrayList<>();
-        }
-        
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            int u = Integer.parseInt(st.nextToken()) - 1;
-            int v = Integer.parseInt(st.nextToken()) - 1;
-            arr[u].add(v);
-            arr[v].add(u);
+            int u = Integer.parseInt(st.nextToken())-1;
+            int v = Integer.parseInt(st.nextToken())-1;
+            arr[u][v] = 1;
+            arr[v][u] = 1;
         }
         int count = 0;
         for (int i = 0; i < N; i++) {
@@ -36,10 +31,10 @@ public class Main {
         System.out.println(count);
         br.close();
     }
-    static void dfs (int n) {
-        visited[n] = true;
-        for (Integer m : arr[n]) {
-            if (!visited[m]) dfs(m);
+    static void dfs(int i) {
+        visited[i] = true;
+        for (int j = 0; j < arr.length; j++) {
+            if (arr[i][j] == 1 && !visited[j]) dfs(j);
         }
     }
 }
