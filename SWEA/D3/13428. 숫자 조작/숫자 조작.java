@@ -8,79 +8,66 @@ class Solution {
         int T = Integer.parseInt(br.readLine());
         for (int t = 0; t < T; t++) {
             String str = br.readLine();
+            int N = Integer.parseInt(str);
             int[] arr = new int[str.length()];
-            for (int i = 0; i < str.length(); i++) {
+            for (int i = 0; i < arr.length; i++) {
                 arr[i] = str.charAt(i) - '0';
             }
-            sb.append('#').append(t+1).append(" ");
-            boolean maxFlag = false;
-            boolean minFlag = false;
-            int min = arr[0];
-            int minIdx = 0;
-            for (int i = 1; i < str.length(); i++) {
-                if (min >= arr[i] && arr[i] != 0) {
-                    min = arr[i];
-                    minIdx = i;
-                }
-            }
-            if (min != arr[0]) {
-                sb.append(arr[minIdx]);
-                for (int j = 1; j < arr.length; j++) {
-                    if (j == minIdx) sb.append(arr[0]);
-                    else sb.append(arr[j]);
-                }
-                sb.append(" ");
-                minFlag = true;
-            }
-            if (!minFlag) {
-                for (int i = 1; i < str.length(); i++) {
-                    min = arr[i];
-                    minIdx = i;
-                    for (int j = i + 1; j < str.length(); j++) {
+            sb.append("#").append(t+1).append(" ");
+
+            // 최솟값
+            String temp = "";
+            for (int i = 0; i < arr.length; i++) {
+                int min = arr[i];
+                int idx = i;
+                for (int j = i+1; j < arr.length; j++) {
+                    if (i == 0) {
+                        if (min >= arr[j] && arr[j] != 0) {
+                            min = arr[j];
+                            idx = j;
+                        }
+                    }
+                    else {
                         if (min >= arr[j]) {
                             min = arr[j];
-                            minIdx = j;
+                            idx = j;
                         }
                     }
-                    if (min != arr[i]) {
-                        for (int j = 0; j < arr.length; j++) {
-                            if (j == i) sb.append(arr[minIdx]);
-                            else if (j == minIdx) sb.append(arr[i]);
-                            else sb.append(arr[j]);
-                        }
-                        sb.append(" ");
-                        minFlag = true;
-                        break;
-                    }
                 }
-                if (!minFlag) {
-                    sb.append(str).append(" ");
-                }
-            }
-
-            for (int i = 0; i < str.length(); i++) {
-                int max = arr[i];
-                int maxIdx = i;
-                for (int j = i + 1; j < str.length(); j++) {
-                    if (max <= arr[j]) {
-                        max = arr[j];
-                        maxIdx = j;
-                    }
-                }
-                if (max != arr[i]) {
+                if (min != arr[i]) { // 교체해야함
                     for (int j = 0; j < arr.length; j++) {
-                        if (j == i) sb.append(arr[maxIdx]);
-                        else if (j == maxIdx) sb.append(arr[i]);
-                        else sb.append(arr[j]);
+                        if (j == i) temp += arr[idx];
+                        else if (j == idx) temp += arr[i];
+                        else temp += arr[j];
                     }
-                    sb.append('\n');
-                    maxFlag = true;
                     break;
                 }
             }
-            if (!maxFlag) {
-                sb.append(str).append('\n');
+            if (temp.equals("")) temp = str; // 그대로
+            sb.append(temp).append(" ");
+
+            // 최댓값
+            temp = "";
+            for (int i = 0; i < arr.length; i++) {
+                int max = arr[i];
+                int idx = i;
+                for (int j = i+1; j < arr.length; j++) {
+                    if (max <= arr[j]) {
+                        max = arr[j];
+                        idx = j;
+                    }
+                }
+                if (max != arr[i]) { // 교체해야함
+                    for (int j = 0; j < arr.length; j++) {
+                        if (j == i) temp += arr[idx];
+                        else if (j == idx) temp += arr[i];
+                        else temp += arr[j];
+                    }
+                    break;
+                }
             }
+            if (temp.equals("")) temp = str; // 그대로
+            sb.append(temp).append('\n');
         }
         System.out.print(sb);
         br.close();
