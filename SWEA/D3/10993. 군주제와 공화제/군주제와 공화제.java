@@ -46,6 +46,7 @@ class Solution {
                     while (table[num] != -1 && table[num] != -2) {
                         num = table[num];
                     }
+                    table[i] = num;
                     sb.append(num+1).append(" ");
                 }
             }
