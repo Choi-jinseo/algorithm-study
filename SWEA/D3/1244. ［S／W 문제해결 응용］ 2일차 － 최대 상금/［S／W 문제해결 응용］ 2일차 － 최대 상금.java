@@ -38,7 +38,7 @@ class Solution {
             boolean flag = false;
             for (int i = 0; i < arr.length - 1; i++) {
                 for (int j = i + 1; j < arr.length; j++) {
-                    if(arr[i] <= arr[j]) {
+                    if(arr[i] < arr[j]) {
                         flag = true;
                         int[] brr = arr.clone();
                         int temp = brr[i];
@@ -49,6 +49,14 @@ class Solution {
                 }
             }
             if (!flag) {
+                for (int i = 0; i < arr.length - 1; i++) {
+                    for (int j = i + 1; j < arr.length; j++) {
+                        if (arr[i] == arr[j]) {
+                            dfs(arr, count - 1);
+                            return;
+                        }
+                    }
+                }
                 int[] brr = arr.clone();
                 int temp = brr[brr.length-2];
                 brr[brr.length-2] = brr[brr.length-1];
