@@ -12,8 +12,7 @@ class Solution {
             int count = 0;
             char bit = '0';
             for (int i = 0; i < str.length(); i++) {
-                if (str.charAt(i) == bit) continue;
-                else {
+                if (str.charAt(i) != bit) {
                     count++;
                     bit = str.charAt(i);
                 }
