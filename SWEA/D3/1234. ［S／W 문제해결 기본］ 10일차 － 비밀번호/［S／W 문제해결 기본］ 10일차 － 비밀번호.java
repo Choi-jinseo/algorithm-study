@@ -20,7 +20,7 @@ public class Solution {
                 for (int i = 0; i < arr.size() - 1; i++) {
                     if (arr.get(i) == arr.get(i+1)) {
                         flag = false;
-                        arr.remove(i+1);
+                        arr.remove(i);
                         arr.remove(i);
                     }
                 }
