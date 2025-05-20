@@ -2,50 +2,49 @@ import java.util.*;
 import java.io.*;
 
 class Solution {
-    static int[] arr;
-    static int[] answer;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         int T = Integer.parseInt(br.readLine());
         for (int t = 0; t < T; t++) {
-            arr = new int[7];
-            answer = new int[300];
             StringTokenizer st = new StringTokenizer(br.readLine());
+            int[] arr = new int[7];
             for (int i = 0; i < 7; i++) {
                 arr[i] = Integer.parseInt(st.nextToken());
             }
-            boolean[] visited = new boolean[7];
-            dfs(visited, 0, 0);
-            int count = 0;
-
-            sb.append("#").append(t+1).append(" ");
-            for (int i = 299; i >= 0; i--) {
-                if (answer[i] != 0) {
+            int[] brr = new int[35];
+            int idx = 0;
+            for (int i = 0; i < 7; i++) {
+                for (int j = i+1; j < 7; j++) {
+                    for (int k = j+1; k < 7; k++) {
+                        brr[idx] = arr[i] + arr[j] + arr[k];
+                        idx++;
+                    }
+                }
+            }
+            for (int i = 0; i < 35; i++) {
+                for (int j = 1; j < 35; j++) {
+                    if (brr[j-1] < brr[j]) {
+                        int temp = brr[j - 1];
+                        brr[j - 1] = brr[j];
+                        brr[j] = temp;
+                    }
+                }
+            }
+            int count = 1;
+            int answer = brr[0];
+            for (int i = 0; i < 34; i++) {
+                if (brr[i] != brr[i+1]) {
                     count++;
                     if (count == 5) {
-                        sb.append(i);
+                        answer = brr[i+1];
                         break;
                     }
                 }
             }
-            sb.append('\n');
+            sb.append("#").append(t + 1).append(" ").append(answer).append('\n');
         }
         System.out.print(sb);
         br.close();
-    }
-
-    static void dfs(boolean[] visited, int cnt, int sum) {
-        if (cnt == 3) {
-            answer[sum]++;
-            return;
-        }
-        for (int i = 0; i < 7; i++) {
-            if (!visited[i]) {
-                boolean[] vc = visited.clone();
-                vc[i] = true;
-                dfs(vc, cnt + 1, sum + arr[i]);
-            }
-        }
     }
 }
