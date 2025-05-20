@@ -20,17 +20,9 @@ class Solution {
                 if (C.equals("I")) {
                     int x = Integer.parseInt(st.nextToken());
                     int y = Integer.parseInt(st.nextToken());
-                    ArrayList<String> temp = new ArrayList<>();
-                    for (int j = 0; j < x; j++) {
-                        temp.add(arr.get(j));
+                    for (int j = x; j < x + y; j++) {
+                        arr.add(j, st.nextToken());
                     }
-                    for (int j = 0; j < y; j++) {
-                        temp.add(st.nextToken());
-                    }
-                    for (int j = x; j < arr.size(); j++) {
-                        temp.add(arr.get(j));
-                    }
-                    arr = temp;
                 } else if (C.equals("D")) {
                     int x = Integer.parseInt(st.nextToken());
                     int y = Integer.parseInt(st.nextToken());
