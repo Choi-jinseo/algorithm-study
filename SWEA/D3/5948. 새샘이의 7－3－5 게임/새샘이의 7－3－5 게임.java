@@ -12,32 +12,21 @@ class Solution {
             for (int i = 0; i < 7; i++) {
                 arr[i] = Integer.parseInt(st.nextToken());
             }
-            int[] brr = new int[35];
-            int idx = 0;
+            int[] brr = new int[300];
             for (int i = 0; i < 7; i++) {
                 for (int j = i+1; j < 7; j++) {
                     for (int k = j+1; k < 7; k++) {
-                        brr[idx] = arr[i] + arr[j] + arr[k];
-                        idx++;
+                        brr[arr[i] + arr[j] + arr[k]]++;
                     }
                 }
             }
-            for (int i = 0; i < 35; i++) {
-                for (int j = 1; j < 35; j++) {
-                    if (brr[j-1] < brr[j]) {
-                        int temp = brr[j - 1];
-                        brr[j - 1] = brr[j];
-                        brr[j] = temp;
-                    }
-                }
-            }
-            int count = 1;
-            int answer = brr[0];
-            for (int i = 0; i < 34; i++) {
-                if (brr[i] != brr[i+1]) {
+            int answer = 0;
+            int count = 0;
+            for (int i = 299; i >= 0; i--) {
+                if (brr[i] != 0) {
                     count++;
                     if (count == 5) {
-                        answer = brr[i+1];
+                        answer = i;
                         break;
                     }
                 }
