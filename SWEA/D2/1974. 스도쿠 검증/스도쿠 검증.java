@@ -16,41 +16,29 @@ class Solution {
             }
             boolean flag = false;
             for (int i = 0; i < 9; i++) {
-                int[] nine = new int[9];
+                HashSet<Integer> hs = new HashSet<>();
                 for (int j = 0; j < 9; j++) {
-                    nine[arr[i][j]-1]++;
+                    hs.add(arr[i][j]);
                 }
-                for (int j = 0; j < 9; j++) {
-                    if (nine[j] != 1) {
-                        flag = true;
-                        break;
-                    }
-                }
-            }
-            for (int j = 0; j < 9; j++) {
-                int[] nine = new int[9];
-                for (int i = 0; i < 9; i++) {
-                    nine[arr[i][j]-1]++;
-                }
-                for (int i = 0; i < 9; i++) {
-                    if (nine[i] != 1) {
-                        flag = true;
-                        break;
-                    }
-                }
+                if (hs.size() != 9) flag = true;
             }
             for (int i = 0; i < 9; i++) {
-                int[] nine = new int[9];
-                for (int j = (i / 3) * 3; j < (i / 3) * 3 + 3; j++) {
-                    for (int k = (i % 3) * 3; k < (i % 3) * 3 + 3; k++) {
-                        nine[arr[j][k]-1]++;
-                    }
-                }
+                HashSet<Integer> hs = new HashSet<>();
                 for (int j = 0; j < 9; j++) {
-                    if (nine[j] != 1) {
-                        flag = true;
-                        break;
+                    hs.add(arr[j][i]);
+                }
+                if (hs.size() != 9) flag = true;
+            }
+            for (int i = 0; i < 9; i+=3) {
+                for (int j = 0; j < 9; j+=3) {
+                    // 3*3의 시작 위치
+                    HashSet<Integer> hs = new HashSet<>();
+                    for (int k = i; k < i+3; k++) {
+                        for (int l = j; l < j+3; l++) {
+                            hs.add(arr[k][l]);
+                        }
                     }
+                    if (hs.size() != 9) flag = true;
                 }
             }
             if (!flag) sb.append("#").append(t + 1).append(" ").append(1).append('\n');
