@@ -1,9 +1,8 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-class Solution
-{
-    public static void main(String args[]) throws Exception {
+class Solution {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         int T = Integer.parseInt(br.readLine());
@@ -11,72 +10,51 @@ class Solution
             StringTokenizer st = new StringTokenizer(br.readLine());
             int N = Integer.parseInt(st.nextToken());
             int K = Integer.parseInt(st.nextToken());
-            int[] arr = new int[N];
-            int[] idx = new int[N];
+            int[] score = new int[N];
+            int[] num = new int[N];
+            for (int i = 0; i < N; i++) {
+                num[i] = i;
+            }
             for (int i = 0; i < N; i++) {
                 st = new StringTokenizer(br.readLine());
-                int exam1 = Integer.parseInt(st.nextToken());
-                int exam2 = Integer.parseInt(st.nextToken());
-                int hw = Integer.parseInt(st.nextToken());
-                arr[i] = exam1 * 35 + exam2 * 45 + hw * 20;
-                idx[i] = i;
+                int sum = 0;
+                sum += Integer.parseInt(st.nextToken()) * 7;
+                sum += Integer.parseInt(st.nextToken()) * 9;
+                sum += Integer.parseInt(st.nextToken()) * 4;
+                score[i] = sum;
             }
+            // score 정렬 하면서 num 도 같이
             for (int i = 0; i < N; i++) {
-                for (int j = 1; j < N - i; j++) {
-                    if (arr[j] > arr[j-1]) {
-                        int temp = arr[j];
-                        arr[j] = arr[j-1];
-                        arr[j-1] = temp;
+                for (int j = 1; j < N; j++) {
+                    if (score[j-1] < score[j]) {
+                        int temp = score[j - 1];
+                        score[j - 1] = score[j];
+                        score[j] = temp;
 
-                        temp = idx[j];
-                        idx[j] = idx[j-1];
-                        idx[j-1] = temp;
+                        temp = num[j - 1];
+                        num[j - 1] = num[j];
+                        num[j] = temp;
                     }
                 }
             }
-            int num;
-            String answer = "";
+            sb.append("#").append(t + 1).append(" ");
             for (int i = 0; i < N; i++) {
-                if (idx[i] == K - 1) {
-                    num = i / (N / 10);
-                    switch (num) {
-                        case 0:
-                            answer = "A+";
-                            break;
-                        case 1:
-                            answer = "A0";
-                            break;
-                        case 2:
-                            answer = "A-";
-                            break;
-                        case 3:
-                            answer = "B+";
-                            break;
-                        case 4:
-                            answer = "B0";
-                            break;
-                        case 5:
-                            answer = "B-";
-                            break;
-                        case 6:
-                            answer = "C+";
-                            break;
-                        case 7:
-                            answer = "C0";
-                            break;
-                        case 8:
-                            answer = "C-";
-                            break;
-                        case 9:
-                            answer = "D0";
-                            break;
-                        default:
-                            answer = "error";
-                            break;
-                    }
+                if (num[i] == K-1) { // num[i] : 학생번호, i : 학생 석차
+                    int grade = i / (N / 10);
+                    if (grade == 0) sb.append("A+");
+                    else if (grade == 1) sb.append("A0");
+                    else if (grade == 2) sb.append("A-");
+                    else if (grade == 3) sb.append("B+");
+                    else if (grade == 4) sb.append("B0");
+                    else if (grade == 5) sb.append("B-");
+                    else if (grade == 6) sb.append("C+");
+                    else if (grade == 7) sb.append("C0");
+                    else if (grade == 8) sb.append("C-");
+                    else if (grade == 9) sb.append("D0");
+                    break;
                 }
             }
-            sb.append("#").append(t + 1).append(" ").append(answer).append('\n');
+            sb.append('\n');
         }
         System.out.print(sb);
         br.close();
