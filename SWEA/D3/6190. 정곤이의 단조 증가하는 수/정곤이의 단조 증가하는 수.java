@@ -18,6 +18,7 @@ class Solution {
                 if (arr[i] % 10 == 0) continue;
                 for (int j = i+1; j < N; j++) { // 두번째 수
                     if (arr[j] % 10 == 0) continue;
+                    if (max >= arr[i] * arr[j]) continue;
                     String str = Integer.toString(arr[i] * arr[j]);
                     boolean flag = false;
                     for (int k = 0; k < str.length()-1; k++) {
