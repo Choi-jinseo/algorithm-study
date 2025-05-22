@@ -7,10 +7,11 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         int T = 1;
         for (int t = 0; t < T; t++) {
-            String str = br.readLine();
+            int n = Integer.parseInt(br.readLine());
             int sum = 0;
-            for (int i = 0; i < str.length(); i++) {
-                sum += (str.charAt(i) - '0');
+            while(n > 0) {
+                sum += n % 10;
+                n /= 10;
             }
             sb.append(sum);
         }
