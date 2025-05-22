@@ -19,13 +19,16 @@ class Solution {
                 for (int j = i+1; j < N; j++) { // 두번째 수
                     if (arr[j] % 10 == 0) continue;
                     if (max >= arr[i] * arr[j]) continue;
-                    String str = Integer.toString(arr[i] * arr[j]);
                     boolean flag = false;
-                    for (int k = 0; k < str.length()-1; k++) {
-                        if (str.charAt(k) > str.charAt(k+1)) {
+                    int temp = arr[i] * arr[j];
+                    while (temp > 0) {
+                        int right = temp % 10;
+                        int left = (temp / 10) % 10;
+                        if (left > right) {
                             flag = true;
                             break;
                         }
+                        temp /= 10;
                     }
                     if (!flag) { // 단조 증가 수
                         max = Math.max(max, arr[i] * arr[j]);
