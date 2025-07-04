@@ -14,15 +14,14 @@ class Solution {
                 arr[i] = Integer.parseInt(st.nextToken());
             }
             int max = 0;
+            int sum = N;
             for (int i = 0; i < N; i++) {
                 if (max < arr[i]) {
                     max = arr[i];
                 }
-            }
-            int sum = max + N;
-            for (int i = 0; i < N; i++) {
                 sum += arr[i];
             }
+            sum += max;
             sb.append("#").append(t + 1).append(" ").append(sum).append('\n');
         }
         System.out.print(sb);
