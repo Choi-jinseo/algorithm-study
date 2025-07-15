@@ -1,6 +1,6 @@
+import java.util.*;
 import java.io.*;
 import java.util.*;
-
 class Solution {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,28 +20,31 @@ class Solution {
             for (int i = 0; i < M; i++) {
                 brr[i] = Integer.parseInt(st.nextToken());
             }
-            int max = 0;
-            if (arr.length <= brr.length) {
-                for (int i = 0; i <= brr.length - arr.length; i++) {
-                    // 시작 위치
-                    int sum = 0;
-                    for (int j = 0; j < arr.length; j++) {
-                        sum += (arr[j] * brr[i+j]);
-                    }
-                    if (sum > max) max = sum;
+            int answer = 0;
+            if (N == M) {
+                for (int i = 0; i < N; i++) {
+                    answer += arr[i] * brr[i];
                 }
             }
-            else {
-                for (int i = 0; i <= arr.length - brr.length; i++) {
-                    // 시작 위치
-                    int sum = 0;
-                    for (int j = 0; j < brr.length; j++) {
-                        sum += (brr[j] * arr[i+j]);
+            else if (N < M) {
+                for (int i = 0; i <= M-N; i++) {
+                    int cnt = 0;
+                    for (int j = 0; j < N; j++) {
+                        cnt += arr[j] * brr[j+i];
                     }
-                    if (sum > max) max = sum;
+                    if (cnt > answer) answer = cnt;
                 }
             }
-            sb.append("#").append(t + 1).append(" ").append(max).append('\n');
+            else { // N > M
+                for (int i = 0; i <= N-M; i++) {
+                    int cnt = 0;
+                    for (int j = 0; j < M; j++) {
+                        cnt += arr[j+i] * brr[j];
+                    }
+                    if (cnt > answer) answer = cnt;
+                }
+            }
+            sb.append("#").append(t + 1).append(" ").append(answer).append('\n');
         }
         System.out.print(sb);
         br.close();
