@@ -1,38 +1,39 @@
-import java.util.*;
 import java.io.*;
-
-class Solution {
+import java.util.*;
+public class Solution {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
+
         int T = Integer.parseInt(br.readLine());
-        for (int t = 0; t < T; t++) {
+        for (int t = 1; t <= T; t++) {
             int N = Integer.parseInt(br.readLine());
             int[] arr = new int[N];
+            int max = 0;
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int king = 0; // 제일 큰 나무
             for (int i = 0; i < N; i++) {
                 arr[i] = Integer.parseInt(st.nextToken());
-                if (king < arr[i]) king = arr[i];
+                max = Math.max(max, arr[i]);
             }
-            int sum = 0; // 총 필요한 키
+            int one = 0, two = 0;
             for (int i = 0; i < N; i++) {
-                sum += king - arr[i];
+                int temp = max - arr[i];
+                two += temp / 2;
+                one += temp % 2;
             }
-            int max2 = 0; // 가능한 최대 +2 횟수
-            for (int i = 0; i < N; i++) {
-                max2 += (king - arr[i]) / 2;
+            // (2)1개 -> (1)2개 로 조정
+            if (one < two) {
+                int temp = (two - one + 1) / 3;
+                one += temp * 2;
+                two -= temp;
             }
-            int min = Integer.MAX_VALUE;
-            // +2 횟수 : 0 ~ max2 인 경우
-            for (int i = 0; i <= max2; i++) {
-                int cnt1 = sum - i * 2;
-                int cnt2 = i;
-                min = Math.min(min, Math.max(cnt1*2-1, cnt2*2)); // 종료 날짜
-            }
-            sb.append("#").append(t + 1).append(" ").append(min).append('\n');
+            int answer = 0;
+            if (one == two) answer = one * 2;
+            else if (one > two) answer = two * 2 + (one - two) * 2 - 1;
+            else answer = one * 2 + 2;
+
+            sb.append("#").append(t).append(" ").append(answer).append('\n');
         }
-        System.out.print(sb);
-        br.close();
+        System.out.println(sb);
     }
 }
