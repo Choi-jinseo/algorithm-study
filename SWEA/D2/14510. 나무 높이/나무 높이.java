@@ -1,39 +1,38 @@
-import java.io.*;
 import java.util.*;
-public class Solution {
+import java.io.*;
+
+class Solution {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-
         int T = Integer.parseInt(br.readLine());
-        for (int t = 1; t <= T; t++) {
+        for (int t = 0; t < T; t++) {
             int N = Integer.parseInt(br.readLine());
-            int[] arr = new int[N];
-            int max = 0;
+            int[] arr = new int[N]; // 나무정보
+            int king = 0;
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int i = 0; i < N; i++) {
                 arr[i] = Integer.parseInt(st.nextToken());
-                max = Math.max(max, arr[i]);
+                if (king < arr[i]) king = arr[i];
             }
-            int one = 0, two = 0;
+            int one = 0;
+            int two = 0;
             for (int i = 0; i < N; i++) {
-                int temp = max - arr[i];
-                two += temp / 2;
-                one += temp % 2;
+                int dist = king - arr[i];
+                one += dist % 2;
+                two += dist / 2;
             }
-            // (2)1개 -> (1)2개 로 조정
-            if (one < two) {
-                int temp = (two - one + 1) / 3;
-                one += temp * 2;
-                two -= temp;
+            // +2 : 0 ~ two
+            int min = Integer.MAX_VALUE;
+            while(two >= 0) {
+                int end = Math.max(one * 2 - 1, two * 2); // 끝나는 점
+                if (end < min) min = end;
+                two -= 1;
+                one += 2;
             }
-            int answer = 0;
-            if (one == two) answer = one * 2;
-            else if (one > two) answer = two * 2 + (one - two) * 2 - 1;
-            else answer = one * 2 + 2;
-
-            sb.append("#").append(t).append(" ").append(answer).append('\n');
+            sb.append("#").append(t + 1).append(" ").append(min).append('\n');
         }
-        System.out.println(sb);
+        System.out.print(sb);
+        br.close();
     }
 }
