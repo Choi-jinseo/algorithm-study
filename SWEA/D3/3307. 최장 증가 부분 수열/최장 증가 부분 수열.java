@@ -1,38 +1,40 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-class Solution {
+public class Solution {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
+
         int T = Integer.parseInt(br.readLine());
-        for (int t = 0; t < T; t++) {
+        for (int t = 1; t <= T; t++) {
             int N = Integer.parseInt(br.readLine());
-            int[] arr = new int[N];
-            int[] dp = new int[N];
+            int[] len = new int[N+1];
+            int idx = 0;
+
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int i = 0; i < N; i++) {
-                arr[i] = Integer.parseInt(st.nextToken());
-            }
-            dp[N-1] = 1; // 맨 마지막 수만 가지고 만든 수열의 크기
-            for (int i = N-2; i >= 0; i--) {
-                int max = 0;
-                for (int j = i+1; j < N; j++) {
-                    if (arr[i] < arr[j]) {
-                        if (dp[j] > max) {
-                            max = dp[j];
+                int num = Integer.parseInt(st.nextToken());
+                if (len[idx] < num) {
+                    len[++idx] = num;
+                } else {
+                    // 이분탐색
+                    int start = 0;
+                    int end = idx;
+                    while (start < end) {
+                        int mid = (start + end) / 2;
+                        if (len[mid] < num) {
+                            start = mid+1;
+                        } else {
+                            end = mid;
                         }
                     }
+                    len[end] = num;
                 }
-                dp[i] = max + 1;
             }
-            int max = 0;
-            for (int i = 0; i < N; i++) {
-                if (max < dp[i]) max = dp[i];
-            }
-            sb.append("#").append(t + 1).append(" ").append(max).append('\n');
+            sb.append("#").append(t).append(" ").append(idx).append('\n');
         }
-        System.out.print(sb);
+        System.out.println(sb);
         br.close();
     }
 }
