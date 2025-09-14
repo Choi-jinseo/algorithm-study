@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-
+ 
 class Solution {
     static int[][] d = {{-1,0}, {1,0}, {0,-1}, {0,1}}; // 상하좌우
     public static void main(String[] args) throws Exception {
@@ -17,11 +17,14 @@ class Solution {
                     arr[i][j] = s.charAt(j)-'0';
                 }
             }
-            boolean[][] visited = new boolean[N][N];
             int[][] cost = new int[N][N];
+            for (int i = 0; i < N; i++) {
+            	for (int j = 0; j < N; j++) {
+                	cost[i][j] = Integer.MAX_VALUE;
+                }
+            }
             Queue<int[]> queue = new ArrayDeque<>();
             queue.add(new int[]{0,0});
-            visited[0][0] = true;
             cost[0][0] = arr[0][0];
             while(!queue.isEmpty()) {
                 int[] node = queue.poll();
@@ -31,9 +34,8 @@ class Solution {
                     int dx = x + d[i][0];
                     int dy = y + d[i][1];
                     if (0<=dx && dx<N && 0<=dy && dy<N) {
-                        if (!visited[dx][dy] || cost[x][y]+arr[dx][dy] < cost[dx][dy]) {
+                        if (cost[x][y]+arr[dx][dy] < cost[dx][dy]) {
                             queue.add(new int[]{dx,dy});
-                            visited[dx][dy] = true;
                             cost[dx][dy] = cost[x][y]+arr[dx][dy];
                         }
                     }
