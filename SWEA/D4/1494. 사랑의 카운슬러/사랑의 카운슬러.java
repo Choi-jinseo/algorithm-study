@@ -29,8 +29,7 @@ public class Solution {
         br.close();
     }
     static void combination(int start, int cnt) { // 현재까지 선택한 쌍의 수, 누적된 벡터의 방향 합
-        if (N-start < N/2 - cnt) return;
-        else if (cnt == N/2) {
+        if (cnt == N/2) {
             long sumX = 0, sumY = 0;
             for (int i = 0; i < N; i++) {
                 if (visited[i]) {
