@@ -1,34 +1,29 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-class Solution {
+public class Solution {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
+
         int T = Integer.parseInt(br.readLine());
-        for (int t = 0; t < T; t++) {
+        for (int t = 1; t <= T; t++) {
             int N = Integer.parseInt(br.readLine());
-            String[] arr = new String[N];
+            String[] shuffle = new String[N];
             StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < (N+1)/2; i++) {
+                shuffle[i*2] = st.nextToken();
+            }
+            for (int i = 0; i < N-(N+1)/2; i++) {
+                shuffle[i*2+1] = st.nextToken();
+            }
+            sb.append("#").append(t);
             for (int i = 0; i < N; i++) {
-                arr[i] = st.nextToken();
-            }
-            sb.append("#").append(t+1).append(" ");
-            if (N == 1) sb.append(arr[0]);
-            else if (N % 2 == 0) {
-                for (int i = 0; i < N / 2; i++) {
-                    sb.append(arr[i]).append(" ").append(arr[N / 2 + i]).append(" ");
-                }
-            }
-            else {
-                for (int i = 0; i < N / 2; i++) {
-                    sb.append(arr[i]).append(" ").append(arr[(N+1)/2 + i]).append(" ");
-                }
-                sb.append(arr[N/2]);
+                sb.append(" ").append(shuffle[i]);
             }
             sb.append('\n');
         }
-        System.out.print(sb);
+        System.out.println(sb);
         br.close();
     }
 }
