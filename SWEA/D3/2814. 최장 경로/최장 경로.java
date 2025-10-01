@@ -1,53 +1,53 @@
 import java.io.*;
+import java.nio.Buffer;
 import java.util.*;
-
-class Solution {
+public class Solution {
+    static int N;
+    static boolean[][] arr;
+    static boolean[] visited;
     static int max;
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
         int T = Integer.parseInt(br.readLine());
-        for (int t = 0; t < T; t++) {
+        for (int t = 1; t <= T; t++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
-            int M = Integer.parseInt(st.nextToken());
-            boolean[][] arr = new boolean[N][N];
-            boolean[] visited = new boolean[N];
+            N = Integer.parseInt(st.nextToken()); // 정점 개수
+            int M = Integer.parseInt(st.nextToken()); // 간선 개수
+
+            arr = new boolean[N][N];
+            visited = new boolean[N];
             max = 0;
+
             for (int i = 0; i < M; i++) {
                 st = new StringTokenizer(br.readLine());
-                int x = Integer.parseInt(st.nextToken())-1;
-                int y = Integer.parseInt(st.nextToken())-1;
-                arr[x][y] = true;
-                arr[y][x] = true;
+                int start = Integer.parseInt(st.nextToken())-1;
+                int end = Integer.parseInt(st.nextToken())-1;
+                arr[start][end] = true;
+                arr[end][start] = true;
             }
+
             for (int i = 0; i < N; i++) {
-                boolean[] vc = visited.clone();
-                vc[i] = true;
-                dfs(arr, vc, i, 1);
+                visited[i] = true;
+                dfs(i, 1);
+                visited[i] = false;
             }
-            sb.append("#").append(t + 1).append(" ").append(max).append('\n');
+
+            sb.append("#").append(t).append(" ").append(max).append('\n');
         }
-        System.out.print(sb);
+        System.out.println(sb);
         br.close();
     }
-    static void dfs(boolean[][] arr, boolean[] visited, int i, int count) {
-        boolean flag = false;
-        for (int k = 0; k < arr[0].length; k++) {
-            if (arr[i][k] && !visited[k]) {
-                flag = true;
-                boolean[][] brr = new boolean[arr[0].length][arr[0].length];
-                for (int j = 0; j < arr.length; j++) {
-                    brr[j] = arr[j].clone();
-                }
-                brr[k][i] = false;
-                brr[k][i] = false;
-                boolean[] vc = visited.clone();
-                vc[k] = true;
-                dfs(brr, vc, k, count + 1);
+    static void dfs(int cur, int sum) {
+        max = Math.max(sum, max);
+        for (int i = 0; i < N; i++) {
+            if (arr[cur][i] && !visited[i]) {
+                visited[i] = true;
+                dfs(i, sum + 1);
+                visited[i] = false;
             }
         }
-        if (!flag && count > max) max = count;
     }
 }
